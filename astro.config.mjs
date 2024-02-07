@@ -6,7 +6,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://astrofy-template.netlify.app',
+  site: 'https://www.alexkarpekov.com',
   integrations: [mdx(), sitemap(), tailwind()],
   // output: 'server',
   // adapter: vercel({
