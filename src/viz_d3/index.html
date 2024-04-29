@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D3 Viz: Milan Activity Map</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+  <div class="grid-container">
+    <div class="header-pane">
+      <h1>HAR Sensor Activity Visualizer</h1>
+      <h2>CITY_NAME: DATE - TIME RANGE</h2>
+    </div>
+    <div class="controls-pane">
+      <div id="controls">
+        <button id="stepBackButton"><i class="fas fa-step-backward"></i></button>
+        <button id="pauseButton"><i class="fas fa-pause"></i></button>
+        <button id="playButton" class="active"><i class="fas fa-play"></i></button>
+        <button id="stepButton"><i class="fas fa-step-forward"></i></button>
+      </div>
+      <div id="timeSlider">
+        <label for="time-slider">Time: </label>
+        <input type="range" id="time-slider" min="1" value="1">
+        <span id="timestampValue">1</span>
+      </div>
+    </div>
+
+    <div class="house-layout-chart-pane">
+      <div id="chartContainer" style="display: inline-block;"></div>
+    </div>
+
+    <div class="labels-pane" id="labelsContainer" style="width: 240px; padding: 10px;">
+    </div>
+
+    <div class="bottom-pane">
+    </div>
+  </div>
+
+  <script src="milan.js"></script>
+</body>
+
+</html>
