@@ -66,7 +66,7 @@ function formatDate(timestamp, get_time_only = false) {
   return `${formattedMonth}/${formattedDay} ${formattedHour}:${formattedMinutes}`;
 }
 
-d3.csv("../src/viz_d3/milan_2009_12_03_5min.csv", function(d) {
+d3.csv("milan_2009_12_03_5min.csv", function(d) {
   d.timestamp_round = parseTime(d.timestamp_round)
   d.label_list = JSON.parse(d.label_list.replace(/'/g, '"'))
   return d;
@@ -110,7 +110,7 @@ d3.csv("../src/viz_d3/milan_2009_12_03_5min.csv", function(d) {
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
   svg.append("image")
-    .attr("xlink:href", "../src/viz_d3/milan_house_map.png")
+    .attr("xlink:href", "milan_house_map.png")
     .attr("width", width+100)
     .attr("height", height+30)
     .attr("x", -60)
