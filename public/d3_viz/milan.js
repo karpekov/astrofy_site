@@ -1,5 +1,6 @@
 const config = {
-  csv_path: "milan_2009_12_03_5min.csv",
+  // csv_path: "milan_2009_12_03_5min.csv",
+  csv_path: "milan_2009_12_03_1min.csv",
   city_name: 'Milan',
   date: '2009-12-03',
   house_map_path: "milan_house_map.png",
