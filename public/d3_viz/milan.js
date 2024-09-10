@@ -5,8 +5,8 @@ const config = {
   date: '2009-12-03',
   house_map_path: "milan_house_map.png",
 
-  timeStampDuration: 1000,
-  transitionDuration: 1100,
+  timeStampDuration: 2000,
+  transitionDuration: 2100,
   minCircleSize: 20,
   maxCircleSize: 100,
   margin: { top: 80, right: 50, bottom: 50, left: 80 },
@@ -36,6 +36,32 @@ const config = {
     'no_activity': '#878787',
     'no_sensor_readings': '#bababa'
   },
+
+  // labelColors_milan: {
+  //   'Sleep': '#37373C',
+  //   'Master_Bedroom_Activity': '#37373C',
+  //   'Master_Bathroom': "#37373C",
+  //   'Bed_to_Toilet': "#37373C",
+  //   'Guest_Bathroom': "#37373C",
+
+  //   'Kitchen_Activity': '#37373C',
+  //   'Dining_Rm_Activity': '#37373C',
+
+  //   'Read': '#37373C',
+  //   'Desk_Activity': '#37373C',
+  //   'Watch_TV': '#37373C',
+
+  //   'Leave_Home': '#37373C',
+  //   'Meditate': '#37373C',
+  //   'Chores': '#37373C',
+
+  //   'Morning_Meds': '#37373C',
+  //   'Eve_Meds': '#37373C',
+
+  //   'no_activity': '#37373C',
+  //   'no_sensor_readings': '#37373C'
+  // },
+
   labelPadding_milan: [4, 6, 9, 12, 14]
 };
 
