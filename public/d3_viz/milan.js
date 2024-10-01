@@ -1,7 +1,8 @@
 const config = {
   // csv_path: "milan_2009_12_03_5min.csv",
   // csv_path: "milan_2009_12_03_1min.csv",
-  csv_path: "milan_2009_11_21_1min.csv",
+  // csv_path: "milan_2009_11_21_1min.csv",
+  csv_path: "milan_2009_11_29_1min.csv",
   city_name: 'Milan',
   // date: '2009-12-03',
   house_map_path: "milan_house_map.png",
@@ -65,10 +66,6 @@ const config = {
 
   labelPadding_milan: [4, 6, 9, 12, 14]
 };
-
-const csvFileName = config.csv_path.split('/').pop();
-const dateMatch = csvFileName.match(/\d{4}_\d{2}_\d{2}/);
-config['date'] = dateMatch ? dateMatch[0].replace(/_/g, '-') : 'unknown-date';
 
 document.addEventListener("DOMContentLoaded", async function() {
   try {
