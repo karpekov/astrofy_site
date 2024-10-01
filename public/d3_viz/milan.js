@@ -67,6 +67,10 @@ const config = {
   labelPadding_milan: [4, 6, 9, 12, 14]
 };
 
+const csvFileName = config.csv_path.split('/').pop();
+const dateMatch = csvFileName.match(/\d{4}_\d{2}_\d{2}/);
+config['date'] = dateMatch ? dateMatch[0].replace(/_/g, '-') : 'unknown-date';
+
 document.addEventListener("DOMContentLoaded", async function() {
   try {
     const data = await loadData(config.csv_path);
