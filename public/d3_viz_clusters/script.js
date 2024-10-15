@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const citySelect = document.getElementById("city-select");
     const csvSelect = document.getElementById("csv-select");
 
-    const cities = ['aruba', 'milan', 'tokyo', 'cairo'];
+    const cities = ['aruba', 'milan'];
     cities.forEach(city => {
         const option = document.createElement('option');
         option.value = city;
