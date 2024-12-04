@@ -13,7 +13,8 @@ const config = {
 
   area_sensor_map: {
     'aruba': ["M007", "M019", "M020", "M024", "M027"],
-    'milan': ["M003", "M023", "M024", "M025", "M026", "M027", "M028"]
+    'milan': ["M003", "M023", "M024", "M025", "M026", "M027", "M028"],
+    'cairo': ["M001", "M004", "M005", "M023", "M024", "M025", "M026"]
   }
 };
 
@@ -120,14 +121,126 @@ const csvFiles = [
   "cluster_19_ex4.csv",
 ];
 
+const encoded_csv_files = [
+  "a0.csv",
+  "a1.csv",
+  "a2.csv",
+  "a3.csv",
+  "a4.csv",
+  "a5.csv",
+  "a6.csv",
+  "a7.csv",
+  "a8.csv",
+  "a9.csv",
+  "a10.csv",
+  "a11.csv",
+  "a12.csv",
+  "a13.csv",
+  "a14.csv",
+  "a15.csv",
+  "a16.csv",
+  "a17.csv",
+  "a18.csv",
+  "a19.csv",
+  "b0.csv",
+  "b1.csv",
+  "b2.csv",
+  "b3.csv",
+  "b4.csv",
+  "b5.csv",
+  "b6.csv",
+  "b7.csv",
+  "b8.csv",
+  "b9.csv",
+  "b10.csv",
+  "b11.csv",
+  "b12.csv",
+  "b13.csv",
+  "b14.csv",
+  "b15.csv",
+  "b16.csv",
+  "b17.csv",
+  "b18.csv",
+  "b19.csv",
+  "c0.csv",
+  "c1.csv",
+  "c2.csv",
+  "c3.csv",
+  "c4.csv",
+  "c5.csv",
+  "c6.csv",
+  "c7.csv",
+  "c8.csv",
+  "c9.csv",
+  "c10.csv",
+  "c11.csv",
+  "c12.csv",
+  "c13.csv",
+  "c14.csv",
+  "c15.csv",
+  "c16.csv",
+  "c17.csv",
+  "c18.csv",
+  "c19.csv",
+  "d0.csv",
+  "d1.csv",
+  "d2.csv",
+  "d3.csv",
+  "d4.csv",
+  "d5.csv",
+  "d6.csv",
+  "d7.csv",
+  "d8.csv",
+  "d9.csv",
+  "d10.csv",
+  "d11.csv",
+  "d12.csv",
+  "d13.csv",
+  "d14.csv",
+  "d15.csv",
+  "d16.csv",
+  "d17.csv",
+  "d18.csv",
+  "d19.csv",
+  "e0.csv",
+  "e1.csv",
+  "e2.csv",
+  "e3.csv",
+  "e4.csv",
+  "e5.csv",
+  "e6.csv",
+  "e7.csv",
+  "e8.csv",
+  "e9.csv",
+  "e10.csv",
+  "e11.csv",
+  "e12.csv",
+  "e13.csv",
+  "e14.csv",
+  "e15.csv",
+  "e16.csv",
+  "e17.csv",
+  "e18.csv",
+  "e19.csv",
+];
+
 let currentControl = null;
 
 document.addEventListener("DOMContentLoaded", function() {
     const showButton = document.getElementById("show-button");
+    const encodingSelect = document.getElementById("encoding-select");
     const citySelect = document.getElementById("city-select");
     const csvSelect = document.getElementById("csv-select");
 
-    const cities = ['aruba', 'milan'];
+    const encodings = ['original', 'encoded'];
+    encodings.forEach(encoding => {
+        const option = document.createElement('option');
+        option.value = encoding;
+        option.textContent = encoding;
+        encodingSelect.appendChild(option);
+    });
+
+    const cities = ['aruba', 'milan', 'cairo'];
     cities.forEach(city => {
         const option = document.createElement('option');
         option.value = city;
@@ -135,23 +248,37 @@ document.addEventListener("DOMContentLoaded", function() {
         citySelect.appendChild(option);
     });
 
-    // Populate the dropdown with the hard-coded list
-    csvFiles.forEach(file => {
+    // Populate the dropdown based on the selected encoding
+    encodingSelect.addEventListener("change", function() {
+      const selectedEncoding = encodingSelect.value;
+      csvSelect.innerHTML = ""; // Clear existing options
+
+      const files = selectedEncoding === "original" ? csvFiles : encoded_csv_files;
+      files.forEach(file => {
         const option = document.createElement('option');
         option.value = `${file}`;
         option.textContent = file;
         csvSelect.appendChild(option);
+      });
     });
+
+    // Trigger change event to populate initially
+    encodingSelect.dispatchEvent(new Event("change"));
 
     // showButton.addEventListener("click", loadVisualization);
     csvSelect.addEventListener("change", loadVisualization);
 });
 
 async function loadVisualization() {
+    const encodingSelect = document.getElementById("encoding-select");
     const csvSelect = document.getElementById("csv-select");
     const citySelect = document.getElementById("city-select");
+
+    const selectedEncoding = encodingSelect.value;
     const selectedCity = citySelect.value;
     const selectedCsvPath = csvSelect.value;
+
+    console.log("selectedCsvPath:", selectedCsvPath);
 
     config.city = selectedCity;
 
@@ -161,7 +288,7 @@ async function loadVisualization() {
             // Reset the visualization
             resetVisualization();
 
-            const data = await loadData(selectedCity, selectedCsvPath);
+            const data = await loadData(selectedEncoding, selectedCity, selectedCsvPath);
             await updateConfigHeight(selectedCity);
             main(data, selectedCity);
         } catch (error) {
@@ -237,10 +364,10 @@ async function updateConfigHeight(city) {
   });
 }
 
-async function loadData(city, fileName) {
+async function loadData(encoding, city, fileName) {
 
   // Append city name to the filepath string
-  const filePath = `${config.csv_folder}/${city}/${fileName}`;
+  const filePath = `${config.csv_folder}/${city}/${encoding}_samples/${fileName}`;
   console.log("Loading data from:", filePath);
 
   const data = await d3.csv(filePath, function(d) {

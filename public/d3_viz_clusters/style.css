@@ -99,6 +99,12 @@ h3 {
   width: 300px;
 }
 
+#encoding-select {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+}
+
 #controls {
   display: flex;
   flex-direction: row;
